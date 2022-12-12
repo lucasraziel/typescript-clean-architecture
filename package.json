@@ -5,8 +5,10 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
-    "pretest": "tsc",
+    "checkts": "tsc --noEmit",
+    "pretest": "npm run lint && npm run checkts",
     "build": "tsc",
+    "lint": "eslint .",
     "commit": "cz",
     "dev": "nodemon --watch 'src/' --exec 'ts-node src/index.ts' -e ts"
   },
