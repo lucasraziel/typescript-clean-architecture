@@ -48,5 +48,12 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "sequelize": "^6.27.0",
+    "sequelize-typescript": "^2.1.5",
+    "sqlite3": "^5.1.4",
+    "uuid": "^9.0.0",
+    "winston": "^3.8.2"
   }
 }
