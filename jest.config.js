@@ -8,11 +8,15 @@ module.exports = {
       useESM: true,
     },
   },
+  transform: {
+    '^.+.(t|j)sx?$': ['@swc/jest'],
+  },
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
   extensionsToTreatAsEsm: ['.ts'],
   collectCoverage: true,
+  coverageProvider: 'v8',
   coverageThreshold: {
     global: {
       branches: 100,
