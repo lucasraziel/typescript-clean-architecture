@@ -67,7 +67,7 @@ describe('Order repository test', () => {
             include: ['items'],
         });
 
-        expect(orderModel.toJSON()).toStrictEqual({
+        expect(orderModel?.toJSON()).toStrictEqual({
             id: '123',
             customer_id: '123',
             total: order.total(),
@@ -82,6 +82,16 @@ describe('Order repository test', () => {
                 },
             ],
         });
+    });
+
+    it('should not find a order', async () => {
+
+       
+        const orderRepository = new OrderRepository();
+    
+
+        await expect(()=>orderRepository.find('123')).rejects.toThrowError('Order not found');
+
     });
 
     it('should update an order', async () => {
@@ -126,6 +136,34 @@ describe('Order repository test', () => {
         expect(updatedOrder.total()).toBe(30);
     });
 
+    it('should not update an order with no existing order ', async () => {
+        const customerRepository = new CustomerRepository();
+        const customer = new Customer('1234', 'Customer 1');
+        const address = new Address('Street 1', 1, 'Zipcode 1', 'City 1');
+        customer.changeAddress(address);
+        await customerRepository.create(customer);
+
+        const productRepository = new ProductRepository();
+        const product = new Product('1234', 'Product 1', 10);
+        await productRepository.create(product);
+
+        const orderItem = new OrderItem(
+            '1',
+            product.name,
+            product.price,
+            product.id,
+            2
+        );
+
+        const order = new Order('12345', '1234', [orderItem]);
+
+        const orderRepository = new OrderRepository();
+   
+
+        await expect(()=>orderRepository.update(order)).rejects.toThrowError('Order not found');
+
+    });
+
     it('should find a order', async () => {
         const customerRepository = new CustomerRepository();
         const customer = new Customer('123', 'Customer 1');
@@ -154,6 +192,8 @@ describe('Order repository test', () => {
 
         expect(orderFound).toStrictEqual(order);
     });
+
+    
 
     it('should find all orders', async () => {
         const customerRepository = new CustomerRepository();

@@ -44,6 +44,7 @@ describe('Customer unit tests', () => {
         }).toThrowError('Address is mandatory to activate a customer');
     });
 
+
     it('should deactivate customer', () => {
         const customer = new Customer('1', 'Customer 1');
 

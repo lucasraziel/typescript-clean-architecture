@@ -34,7 +34,7 @@ describe('Customer repository test', () => {
             where: { id: '123' },
         });
 
-        expect(customerModel.toJSON()).toStrictEqual({
+        expect(customerModel?.toJSON()).toStrictEqual({
             id: '123',
             name: customer.name,
             active: customer.isActive(),
@@ -59,7 +59,7 @@ describe('Customer repository test', () => {
             where: { id: '123' },
         });
 
-        expect(customerModel.toJSON()).toStrictEqual({
+        expect(customerModel?.toJSON()).toStrictEqual({
             id: '123',
             name: customer.name,
             active: customer.isActive(),

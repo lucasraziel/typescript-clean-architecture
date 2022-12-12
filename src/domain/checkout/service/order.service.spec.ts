@@ -41,4 +41,9 @@ describe('Order service unit tets', () => {
         expect(customer.rewardPoints).toBe(200);
         expect(order.items).toEqual([item2]);
     });
+
+    it ('should not create items with no itetms', () => {
+        const customer = new Customer('c1', 'Customer 1');
+        expect(()=>(OrderService.placeOrder(customer, []))).toThrow('Order must have at least one item');
+    })
 });

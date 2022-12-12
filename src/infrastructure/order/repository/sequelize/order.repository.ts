@@ -26,12 +26,9 @@ export default class OrderRepository implements OrderRepositoryInterface {
     }
 
     async update(entity: Order): Promise<void> {
-        if (!OrderModel.sequelize) {
-            throw new Error('Sequelize not found');
-        }
-        const transaction = await OrderModel.sequelize.transaction();
+        const transaction = await OrderModel.sequelize?.transaction();
         try {
-            await OrderModel.update(
+            const [updated] = await OrderModel.update(
                 {
                     id: entity.id,
                     customer_id: entity.customerId,
@@ -42,6 +39,11 @@ export default class OrderRepository implements OrderRepositoryInterface {
                     transaction,
                 }
             );
+
+
+            if (!updated) {
+                throw new Error('Order not found');
+            }
 
             const promises = entity.items.map((item) =>
                 OrderItemModel.update(
@@ -58,9 +60,10 @@ export default class OrderRepository implements OrderRepositoryInterface {
                 )
             );
             await Promise.all(promises);
-            transaction.commit();
+            transaction?.commit();
         } catch (error) {
-            transaction.rollback();
+            await transaction?.rollback();
+            throw error;
         }
     }
 
