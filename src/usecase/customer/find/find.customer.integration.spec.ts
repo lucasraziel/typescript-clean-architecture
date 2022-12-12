@@ -53,4 +53,15 @@ describe('Test find customer use case', () => {
 
     expect(result).toEqual(output);
   });
+
+  it('should not find a customer', async () => {
+    const customerRepository = new CustomerRepository();
+    const usecase = new FindCustomerUseCase(customerRepository);
+
+    const input = {
+      id: '1234',
+    };
+
+    expect(() => usecase.execute(input)).rejects.toThrow('Customer not found');
+  });
 });
