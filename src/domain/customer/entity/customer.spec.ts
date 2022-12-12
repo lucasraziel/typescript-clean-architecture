@@ -2,74 +2,73 @@ import Address from '../value-object/address';
 import Customer from './customer';
 
 describe('Customer unit tests', () => {
-    it('should throw error when id is empty', () => {
-        expect(() => {
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const customer = new Customer('', 'John');
-        }).toThrowError('Id is required');
-    });
+  it('should throw error when id is empty', () => {
+    expect(() => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const customer = new Customer('', 'John');
+    }).toThrowError('Id is required');
+  });
 
-    it('should throw error when name is empty', () => {
-        expect(() => {
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const customer = new Customer('123', '');
-        }).toThrowError('Name is required');
-    });
+  it('should throw error when name is empty', () => {
+    expect(() => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const customer = new Customer('123', '');
+    }).toThrowError('Name is required');
+  });
 
-    it('should change name', () => {
-        // Arrange
-        const customer = new Customer('123', 'John');
+  it('should change name', () => {
+    // Arrange
+    const customer = new Customer('123', 'John');
 
-        // Act
-        customer.changeName('Jane');
+    // Act
+    customer.changeName('Jane');
 
-        // Assert
-        expect(customer.name).toBe('Jane');
-    });
+    // Assert
+    expect(customer.name).toBe('Jane');
+  });
 
-    it('should activate customer', () => {
-        const customer = new Customer('1', 'Customer 1');
-        const address = new Address('Street 1', 123, '13330-250', 'São Paulo');
-        customer.changeAddress(address);
+  it('should activate customer', () => {
+    const customer = new Customer('1', 'Customer 1');
+    const address = new Address('Street 1', 123, '13330-250', 'São Paulo');
+    customer.changeAddress(address);
 
-        customer.activate();
+    customer.activate();
 
-        expect(customer.isActive()).toBe(true);
-    });
+    expect(customer.isActive()).toBe(true);
+  });
 
-    it('should throw error when address is undefined when you activate a customer', () => {
-        expect(() => {
-            const customer = new Customer('1', 'Customer 1');
-            customer.activate();
-        }).toThrowError('Address is mandatory to activate a customer');
-    });
+  it('should throw error when address is undefined when you activate a customer', () => {
+    expect(() => {
+      const customer = new Customer('1', 'Customer 1');
+      customer.activate();
+    }).toThrowError('Address is mandatory to activate a customer');
+  });
 
+  it('should deactivate customer', () => {
+    const customer = new Customer('1', 'Customer 1');
 
-    it('should deactivate customer', () => {
-        const customer = new Customer('1', 'Customer 1');
+    customer.deactivate();
 
-        customer.deactivate();
+    expect(customer.isActive()).toBe(false);
+  });
 
-        expect(customer.isActive()).toBe(false);
-    });
+  it('should add reward points', () => {
+    const customer = new Customer('1', 'Customer 1');
+    expect(customer.rewardPoints).toBe(0);
 
-    it('should add reward points', () => {
-        const customer = new Customer('1', 'Customer 1');
-        expect(customer.rewardPoints).toBe(0);
+    customer.addRewardPoints(10);
+    expect(customer.rewardPoints).toBe(10);
 
-        customer.addRewardPoints(10);
-        expect(customer.rewardPoints).toBe(10);
+    customer.addRewardPoints(10);
+    expect(customer.rewardPoints).toBe(20);
+  });
 
-        customer.addRewardPoints(10);
-        expect(customer.rewardPoints).toBe(20);
-    });
+  it('should remove reward points', () => {
+    const customer = new Customer('1', 'Customer 1');
+    customer.addRewardPoints(10);
+    expect(customer.rewardPoints).toBe(10);
 
-    it('should remove reward points', () => {
-        const customer = new Customer('1', 'Customer 1');
-        customer.addRewardPoints(10);
-        expect(customer.rewardPoints).toBe(10);
-
-        customer.removeRewardPoints(5);
-        expect(customer.rewardPoints).toBe(5);
-    });
+    customer.removeRewardPoints(5);
+    expect(customer.rewardPoints).toBe(5);
+  });
 });

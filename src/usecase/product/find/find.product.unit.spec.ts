@@ -34,13 +34,13 @@ describe('Test find product use case', () => {
     const usecase = new FindProductUseCase(productRepository);
 
     productRepository.find.mockImplementation(() => {
-        throw new Error('Product not found');
+      throw new Error('Product not found');
     });
 
     const input = {
       id: '1',
     };
 
-    expect(()=>usecase.execute(input)).rejects.toThrow('Product not found');
+    expect(() => usecase.execute(input)).rejects.toThrow('Product not found');
   });
 });

@@ -4,9 +4,9 @@ import ProductCreatedEvent from '../product-created.event';
 import logger from '../../../../infrastructure/@shared/log/logger';
 
 export default class SendEmailWhenProductIsCreatedHandler
-    implements EventHandlerInterface<ProductCreatedEvent>
+  implements EventHandlerInterface<ProductCreatedEvent>
 {
-    handle(event: ProductCreatedEvent): void {
-        logger.info(`Sending email to .....${event.eventData}`);
-    }
+  handle(event: ProductCreatedEvent): void {
+    logger.info(`Sending email to .....${event.eventData}`);
+  }
 }

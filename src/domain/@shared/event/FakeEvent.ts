@@ -1,12 +1,12 @@
 import EventInterface from './event.interface';
 
 export default class FakeEvent implements EventInterface {
-    dataTimeOccurred: Date;
+  dataTimeOccurred: Date;
 
-    eventData: unknown;
+  eventData: unknown;
 
-    constructor() {
-        this.dataTimeOccurred = new Date();
-        this.eventData = {};
-    }
+  constructor() {
+    this.dataTimeOccurred = new Date();
+    this.eventData = {};
+  }
 }

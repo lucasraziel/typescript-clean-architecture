@@ -23,10 +23,14 @@
     "rules": {
         "prettier/prettier": "error",
         "max-classes-per-file": "off",
-        "no-underscore-dangle": {
-            "enforceInClassFields": true
-        },
-        }
+        "no-underscore-dangle": [
+            "error",
+            {
+                "enforceInClassFields": false,
+                "allowAfterThis": true
+            }
+        ],
+        "class-methods-use-this": "off",
         "import/extensions": [
             "error",
             "ignorePackages",

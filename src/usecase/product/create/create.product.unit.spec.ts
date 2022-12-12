@@ -1,5 +1,5 @@
-import Product from "../../../domain/product/entity/product";
-import CreateProductUseCase from "./create.product.usecase";
+import Product from '../../../domain/product/entity/product';
+import CreateProductUseCase from './create.product.usecase';
 
 const product = new Product('1', 'Product 1', 10);
 const MockRepository = () => ({
@@ -10,93 +10,88 @@ const MockRepository = () => ({
 });
 
 describe('Test Create Product Use Case', () => {
-    it('should create a product of type A', async () => {
-        const productRepository = MockRepository();
-        const usecase = new CreateProductUseCase(productRepository);
+  it('should create a product of type A', async () => {
+    const productRepository = MockRepository();
+    const usecase = new CreateProductUseCase(productRepository);
 
-        const input = {
-            name: 'Product 1',
-            price: 10,
-            type: 'a'
-        };
+    const input = {
+      name: 'Product 1',
+      price: 10,
+      type: 'a',
+    };
 
-        const output = {
-            id: expect.any(String),
-            name: 'Product 1',
-            price: 10,
-        };
+    const output = {
+      id: expect.any(String),
+      name: 'Product 1',
+      price: 10,
+    };
 
-        const result = await usecase.execute(input)
+    const result = await usecase.execute(input);
 
-        expect(result).toEqual(output);
-    });
+    expect(result).toEqual(output);
+  });
 
-    it('should create a product of type B', async () => {
-        const productRepository = MockRepository();
-        const usecase = new CreateProductUseCase(productRepository);
+  it('should create a product of type B', async () => {
+    const productRepository = MockRepository();
+    const usecase = new CreateProductUseCase(productRepository);
 
-        const input = {
-            name: 'Product 1',
-            price: 10,
-            type: 'b'
-        };
+    const input = {
+      name: 'Product 1',
+      price: 10,
+      type: 'b',
+    };
 
-        const output = {
-            id: expect.any(String),
-            name: 'Product 1',
-            price: 20,
-        };
+    const output = {
+      id: expect.any(String),
+      name: 'Product 1',
+      price: 20,
+    };
 
-        const result = await usecase.execute(input)
+    const result = await usecase.execute(input);
 
-        expect(result).toEqual(output);
-    });
+    expect(result).toEqual(output);
+  });
 
-    it('should not create a product with an inexistent type', async () => {
-        const productRepository = MockRepository();
-        const usecase = new CreateProductUseCase(productRepository);
+  it('should not create a product with an inexistent type', async () => {
+    const productRepository = MockRepository();
+    const usecase = new CreateProductUseCase(productRepository);
 
-        const input = {
-            name: 'Product 1',
-            price: 10,
-            type: 'c'
-        };
+    const input = {
+      name: 'Product 1',
+      price: 10,
+      type: 'c',
+    };
 
-        
+    expect(() => usecase.execute(input)).rejects.toThrow(
+      'Product type not supported'
+    );
+  });
 
-        expect(()=>usecase.execute(input)).rejects.toThrow('Product type not supported');
-    });
+  it('should not create a product with an empty name', async () => {
+    const productRepository = MockRepository();
+    const usecase = new CreateProductUseCase(productRepository);
 
-    it('should not create a product with an empty name', async () => {
-        const productRepository = MockRepository();
-        const usecase = new CreateProductUseCase(productRepository);
+    const input = {
+      name: '',
+      price: 10,
+      type: 'a',
+    };
 
-        const input = {
-            name: '',
-            price: 10,
-            type: 'a'
-        };
+    expect(() => usecase.execute(input)).rejects.toThrow('Name is required');
+  });
 
-        
+  it('should not create a product with negative Price', async () => {
+    const productRepository = MockRepository();
+    const usecase = new CreateProductUseCase(productRepository);
 
-        expect(()=>usecase.execute(input)).rejects.toThrow('Name is required');
-    });
+    const input = {
+      name: 'produto 1',
+      price: -10,
+      type: 'a',
+    };
 
-    it('should not create a product with negative Price', async () => {
-        const productRepository = MockRepository();
-        const usecase = new CreateProductUseCase(productRepository);
-
-        const input = {
-            name: 'produto 1',
-            price: -10,
-            type: 'a'
-        };
-
-        
-
-        expect(()=>usecase.execute(input)).rejects.toThrow('Price must be greater than zero');
-    });
-
-    
+    expect(() => usecase.execute(input)).rejects.toThrow(
+      'Price must be greater than zero'
+    );
+  });
 });
-

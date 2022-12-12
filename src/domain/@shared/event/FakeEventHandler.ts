@@ -4,9 +4,9 @@ import logger from '../../../infrastructure/@shared/log/logger';
 import FakeEvent from './FakeEvent';
 
 export default class FakeEventHandler
-    implements EventHandlerInterface<FakeEvent>
+  implements EventHandlerInterface<FakeEvent>
 {
-    handle(event: EventInterface): void {
-        logger.info(event);
-    }
+  handle(event: EventInterface): void {
+    logger.info(event);
+  }
 }

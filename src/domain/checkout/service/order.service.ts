@@ -4,28 +4,28 @@ import OrderItem from '../entity/order_item';
 import Customer from '../../customer/entity/customer';
 
 export default class OrderService {
-    static placeOrder(customer: Customer, items: OrderItem[]): Order {
-        if (items.length === 0) {
-            throw new Error('Order must have at least one item');
-        }
-        const order = new Order(uuid(), customer.id, items);
-        customer.addRewardPoints(order.total() / 2);
-        return order;
+  static placeOrder(customer: Customer, items: OrderItem[]): Order {
+    if (items.length === 0) {
+      throw new Error('Order must have at least one item');
     }
+    const order = new Order(uuid(), customer.id, items);
+    customer.addRewardPoints(order.total() / 2);
+    return order;
+  }
 
-    static changeItemsFromOrder(
-        order: Order,
-        items: OrderItem[],
-        customer: Customer
-    ): Order {
-        customer.removeRewardPoints(order.total() / 2);
-        order.changeItems(items);
-        customer.addRewardPoints(order.total() / 2);
+  static changeItemsFromOrder(
+    order: Order,
+    items: OrderItem[],
+    customer: Customer
+  ): Order {
+    customer.removeRewardPoints(order.total() / 2);
+    order.changeItems(items);
+    customer.addRewardPoints(order.total() / 2);
 
-        return order;
-    }
+    return order;
+  }
 
-    static total(orders: Order[]): number {
-        return orders.reduce((acc, order) => acc + order.total(), 0);
-    }
+  static total(orders: Order[]): number {
+    return orders.reduce((acc, order) => acc + order.total(), 0);
+  }
 }

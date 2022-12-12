@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
+    "pretest": "tsc",
     "build": "tsc",
     "commit": "cz",
     "dev": "nodemon --watch 'src/' --exec 'ts-node src/index.ts' -e ts"
