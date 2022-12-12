@@ -23,6 +23,10 @@
     "rules": {
         "prettier/prettier": "error",
         "max-classes-per-file": "off",
+        "no-underscore-dangle": {
+            "enforceInClassFields": true
+        },
+        }
         "import/extensions": [
             "error",
             "ignorePackages",
