@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import logger from '../../log/logger';
+import logger from '../../../log/logger';
 
 const logMiddleware = (
   request: Request,

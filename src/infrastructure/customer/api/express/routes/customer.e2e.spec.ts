@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { app, sequelize } from '../../../@shared/api/express';
+import { app, sequelize } from '../../../../@shared/api/express/app';
 
 describe('E2E test for customer', () => {
   beforeEach(async () => {

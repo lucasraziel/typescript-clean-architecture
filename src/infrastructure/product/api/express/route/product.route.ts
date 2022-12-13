@@ -1,8 +1,8 @@
 import express, { Request, Response } from 'express';
-import CreateProductUseCase from '../../../../usecase/product/create/create.product.usecase';
-import ListProductUseCase from '../../../../usecase/product/list/list.product.usecase';
-import ProductRepository from '../../repository/sequelize/product.repository';
-import ProductPresenter from '../presenters/product.presenter';
+import CreateProductUseCase from '../../../../../usecase/product/create/create.product.usecase';
+import ListProductUseCase from '../../../../../usecase/product/list/list.product.usecase';
+import ProductRepository from '../../../repository/sequelize/product.repository';
+import ProductPresenter from '../../presenters/product.presenter';
 
 // eslint-disable-next-line import/prefer-default-export
 export const productRoute = express.Router();

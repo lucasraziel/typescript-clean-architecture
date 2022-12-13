@@ -1,8 +1,8 @@
 import express, { Request, Response } from 'express';
-import CreateCustomerUseCase from '../../../../usecase/customer/create/create.customer.usecase';
-import ListCustomerUseCase from '../../../../usecase/customer/list/list.customer.usecase';
-import CustomerRepository from '../../repository/sequelize/customer.repository';
-import CustomerPresenter from '../presenters/customer.presenter';
+import CreateCustomerUseCase from '../../../../../usecase/customer/create/create.customer.usecase';
+import ListCustomerUseCase from '../../../../../usecase/customer/list/list.customer.usecase';
+import CustomerRepository from '../../../repository/sequelize/customer.repository';
+import CustomerPresenter from '../../presenters/customer.presenter';
 
 // eslint-disable-next-line import/prefer-default-export
 export const customerRoute = express.Router();
