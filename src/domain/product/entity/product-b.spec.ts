@@ -5,21 +5,30 @@ describe('Product unit tests', () => {
     expect(() => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const product = new Product('', 'Product 1', 100);
-    }).toThrowError('Id is required');
+    }).toThrowError('product: Id is required');
   });
 
   it('should throw error when name is empty', () => {
     expect(() => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const product = new Product('123', '', 100);
-    }).toThrowError('Name is required');
+    }).toThrowError('product: Name is required');
   });
 
   it('should throw error when price is less than zero', () => {
     expect(() => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const product = new Product('123', 'Name', -1);
-    }).toThrowError('Price must be greater than zero');
+    }).toThrowError('product: Price must be greater than zero');
+  });
+
+  it('should throw all errors', () => {
+    expect(() => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const product = new Product('', '', -1);
+    }).toThrowError(
+      'product: Name is required,product: Id is required,product: Price must be greater than zero'
+    );
   });
 
   it('should change name', () => {

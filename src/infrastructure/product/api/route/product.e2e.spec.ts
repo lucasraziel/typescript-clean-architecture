@@ -51,6 +51,19 @@ describe('E2E test for product', () => {
     expect(response.status).toBe(500);
   });
 
+  it('should bring all errors', async () => {
+    const response = await request(app).post('/product').send({
+      name: '',
+      price: -100,
+      type: 'a',
+    });
+    expect(response.status).toBe(500);
+    expect(response.body.errors).toEqual([
+      { context: 'product', message: 'Name is required' },
+      { context: 'product', message: 'Price must be greater than zero' },
+    ]);
+  });
+
   it('should not create a product when type is wrong', async () => {
     const response = await request(app).post('/product').send({
       name: 'Product 1',

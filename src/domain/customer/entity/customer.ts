@@ -1,5 +1,4 @@
 import Entity from '../../@shared/entity/entity.abstract';
-import NotificationError from '../../@shared/notification/notification.error';
 // eslint-disable-next-line import/no-cycle
 import CustomerValidatorFactory from '../factory/customer.validator.factory';
 import Address from '../value-object/address';
@@ -18,9 +17,6 @@ export default class Customer extends Entity {
     this._id = id;
     this._name = name;
     this.validate();
-    if (this.notification.hasErrors()) {
-      throw new NotificationError(this.notification.getErrors());
-    }
   }
 
   get id(): string {
